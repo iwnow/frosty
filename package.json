@@ -1,0 +1,28 @@
+{
+  "name": "frosty",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iwnow/frosty.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iwnow/frosty/issues"
+  },
+  "homepage": "https://github.com/iwnow/frosty#readme",
+  "dependencies": {
+    "pixi.js": "^4.5.6",
+    "typescript": "^2.5.3"
+  },
+  "devDependencies": {
+    "@types/pixi.js": "^4.5.7",
+    "webpack": "^3.8.1"
+  }
+}
