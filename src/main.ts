@@ -1,13 +1,17 @@
+import textures from './textures';
 
-const gameDiv = document.getElementById('game') as HTMLDivElement;
+textures.images().forEach(i => document.body.appendChild(i));
 
-const height = gameDiv.clientHeight,
-	width = gameDiv.clientWidth;
+// const gameDiv = document.getElementById('game') as HTMLDivElement;
 
-const renderer = PIXI.autoDetectRenderer(width, height);
+// const height = gameDiv.clientHeight,
+// 	width = gameDiv.clientWidth;
 
-gameDiv.appendChild(renderer.view);
+// const renderer = PIXI.autoDetectRenderer(width, height);
 
-const stage = new PIXI.Container();
+// gameDiv.appendChild(renderer.view);
 
-renderer.render(stage);
+// const stage = new PIXI.Container();
+
+// renderer.render(stage);
+
