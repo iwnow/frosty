@@ -1,0 +1,49 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+body {
+	font-family: Charter;
+	font-size: 48px;
+	background-color: #333;
+}
+
+.page_wrap {
+	height: 100%;
+	background-color: rgb(209, 252, 190);/*#d3f7ff;*/
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin: 0 auto;
+	max-width: 600px;
+}
+
+.page_footer_wrap {
+	bottom: 0;
+	background: #fff;
+	z-index: 2;
+	margin: auto;
+	max-width: 600px;
+}
+
+.button_left .icon_play {
+	background-image: url('../img/play.png');
+}
+
+.button_left .icon, .button_left .icon_play, .button_left .icon_refresh, .button_right .icon {
+	width: 60px;
+	height: 60px;
+	background-size: 60px 60px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	-webkit-transition: opacity .2s ease-in;
+	transition: opacity .2s ease-in;
+	z-index: 1;
+}

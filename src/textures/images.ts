@@ -1,7 +1,13 @@
+import SvgObj from './svg-obj';
 import svgs from './svg';
 
-export default () => Object.keys(svgs).map(key => {
-	const img = new Image();
-	img.src = 'data:image/svg+xml,' + svgs[key];
-	return img;
-})
+export default () => {
+	let images = {};
+
+	Object.keys(svgs).forEach(key => {
+		const img = new Image();
+		img.src = 'data:image/svg+xml,' + svgs[key];
+		images[key] = img;
+	})
+	return <SvgObj<HTMLImageElement>>images;
+}

@@ -4,23 +4,37 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport"
-	      content="width=device-width, initial-scale=1.0">
+	      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible"
 	      content="ie=edge">
-	<link rel="stylesheet"
-	      href="node_modules/normalize.css/normalize.css">
 	<title>Frosty</title>
-	<style>
-		#game {
-			margin: 0 auto;
-			height: 100vh;
-			width: 500px;
-		}
-	</style>
 </head>
 
 <body>
-	<!-- <div id="game"></div> -->
+	<div id="page_wrap"
+	     class="page_wrap">
+		<div id="canvas_wrap"></div>
+		<div class="page_footer_wrap">
+			<!-- <div class="page_footer">
+				<div class="buttons">
+					<div class="button_wrap button_left">
+						<div id="button_left"
+						     class="button">
+							<div class="icon"></div>
+							<div class="icon_refresh"></div>
+							<div class="icon_play"></div>
+						</div>
+					</div>
+					<div class="button_wrap button_right">
+						<div id="button_right"
+						     class="button">
+							<div class="icon"></div>
+						</div>
+					</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
 
 	<script src="node_modules/pixi.js/dist/pixi.js"></script>
 	<!-- <script src="node_modules/pixi.js/dist/pixi.min.js"></script> -->

@@ -1,17 +1,15 @@
-import textures from './textures';
+import './assets/css/main.css';
+import { getState } from './state';
 
-textures.images().forEach(i => document.body.appendChild(i));
+const gameDiv = document.getElementById('canvas_wrap') as HTMLDivElement,
+	height = gameDiv.clientHeight,
+	width = gameDiv.clientWidth,
+	app = new PIXI.Application(width, height, {
+		transparent: true
+	});
 
-// const gameDiv = document.getElementById('game') as HTMLDivElement;
 
-// const height = gameDiv.clientHeight,
-// 	width = gameDiv.clientWidth;
+gameDiv.appendChild(app.view);
 
-// const renderer = PIXI.autoDetectRenderer(width, height);
-
-// gameDiv.appendChild(renderer.view);
-
-// const stage = new PIXI.Container();
-
-// renderer.render(stage);
+app.ticker.add(() => getState(app.stage));
 

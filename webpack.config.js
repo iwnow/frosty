@@ -33,6 +33,23 @@ module.exports = {
 				test: /\.tsx?$/,
 				use: 'awesome-typescript-loader',
 				exclude: /node_modules/
+			},
+			{
+				test: /\.css$/,
+				use: [
+					'style-loader',
+					'css-loader'
+				]
+			},
+			{
+				test: /\.(png|jp(e*)g|svg)$/,
+				use: [{
+					loader: 'url-loader',
+					options: {
+						limit: 8000,
+						name: 'images/[hash]-[name].[ext]'
+					}
+				}]
 			}
 		]
 	},

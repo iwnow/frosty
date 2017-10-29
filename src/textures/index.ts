@@ -1,8 +1,5 @@
-import images from './images';
+import getImages from './images';
+import getTextures from './textures';
 
-const pixiTextures = [];
-
-export default {
-	images,
-	pixiTextures
-}
+export const images = getImages();
+export const textures = getTextures();
