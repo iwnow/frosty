@@ -11,5 +11,5 @@ const gameDiv = document.getElementById('canvas_wrap') as HTMLDivElement,
 
 gameDiv.appendChild(app.view);
 
-app.ticker.add(() => getState(app.stage));
+app.ticker.add(() => getState(app));
 

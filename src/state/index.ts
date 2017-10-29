@@ -1,6 +1,6 @@
 import States from './states';
 import { textures } from '../textures';
-import { GameState } from './game-state';
+import { GameState, HeroSide } from './game-state';
 import failHandler from './fail';
 import playHandler from './play';
 import playAltHandler from './play-alt';
@@ -9,26 +9,40 @@ import setupHandler from './setup';
 
 export const getInitialState: () => GameState = () => ({
 	state: States.setup,
+	levelH: 0,
 	prevState: null,
-	sprites: new Map()
+	heroState: {
+		spriteLeft: new PIXI.Sprite(textures.hero01),
+		spriteRight: new PIXI.Sprite(textures.hero01),
+		spriteLeftDig: new PIXI.Sprite(textures.hero02),
+		spriteRightDig: new PIXI.Sprite(textures.hero02),
+		spriteLeftFail: new PIXI.Sprite(textures.hero03),
+		spriteRightFail: new PIXI.Sprite(textures.hero03),
+		onSide: HeroSide.leftSide,
+		isDigging: false,
+		startDigTime: -1
+	},
+	trackSprite: new PIXI.extras.TilingSprite(textures.track),
+	packSprite: new PIXI.Sprite(textures.treasure),
+	healthSprite: new PIXI.Sprite(textures.timebar)
 });
 
-const nextState = (currentState: GameState, stage: PIXI.Container) => {
+const nextState = (currentState: GameState, app: PIXI.Application) => {
 	switch (currentState.state) {
 		case States.setup:
-			setupHandler(currentState, stage);
+			setupHandler(currentState, app);
 			break;
 		case States.play:
-			playHandler(currentState, stage);
+			playHandler(currentState, app);
 			break;
 		case States.playAlt:
-			playAltHandler(currentState, stage);
+			playAltHandler(currentState, app);
 			break;
 		case States.start:
-			startHandler(currentState, stage);
+			startHandler(currentState, app);
 			break;
 		case States.fail:
-			failHandler(currentState, stage);
+			failHandler(currentState, app);
 			break;
 		default:
 			break;
@@ -36,7 +50,9 @@ const nextState = (currentState: GameState, stage: PIXI.Container) => {
 	return currentState;
 }
 
-export const getState: (stage: PIXI.Container) => GameState
+const initialState = getInitialState();
+window['__state'] = initialState;
+export const getState: (app: PIXI.Application) => GameState
 	= ((state: GameState) =>
-		(stage: PIXI.Container) => nextState(state, stage)
-	)(getInitialState())
+		(app: PIXI.Application) => nextState(state, app)
+	)(initialState)
