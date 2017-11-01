@@ -8,9 +8,23 @@ import startHandler from './start';
 import setupHandler from './setup';
 
 export const getInitialState: () => GameState = () => ({
+	getInitial: getInitialState,
 	state: States.setup,
-	levelH: 0,
+	levelH: 57,
+	stepH: 0,
+	bottomY: 0,
+	leftCenterX: 0,
+	rightCenterX: 0,
 	prevState: null,
+	viewTrackLevels: {
+		max: 0,
+		min: 0
+	},
+	obstacles: [],
+	texturesObstacles: {
+		normal: [],
+		alternative: []
+	},
 	heroState: {
 		spriteLeft: new PIXI.Sprite(textures.hero01),
 		spriteRight: new PIXI.Sprite(textures.hero01),
