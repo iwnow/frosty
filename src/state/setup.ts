@@ -21,7 +21,8 @@ const setupHandler: NextStateHandler = (state, app) => {
 
 	const heroSpriteLeft = heroState.spriteLeft,
 		heroSpriteRight = heroState.spriteRight,
-		heroSpriteLeftDig = heroState.spriteLeftDig
+		heroSpriteLeftDig = heroState.spriteLeftDig,
+		heroSpriteRightDig = heroState.spriteRightDig;
 
 	state.stepH = heroSpriteLeft.height / 2;
 	heroSpriteLeft.anchor.set(.5, 1);
@@ -52,7 +53,16 @@ const setupHandler: NextStateHandler = (state, app) => {
 	heroSpriteRight.scale.x = -1;
 	heroSpriteRight.visible = false;
 
+	heroSpriteRightDig.anchor.set(.5, 1);
+	heroSpriteRightDig.position.set(
+		state.rightCenterX,
+		state.bottomY
+	);
+	heroSpriteRightDig.scale.x = -1;
+	heroSpriteRightDig.visible = false;
+
 	app.stage.addChild(heroSpriteRight);
+	app.stage.addChild(heroSpriteRightDig);
 
 	healthSprite.anchor.set(.5, 0);
 	healthSprite.position.set(app.renderer.width / 2, -10);
