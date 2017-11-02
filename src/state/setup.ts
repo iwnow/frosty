@@ -20,7 +20,8 @@ const setupHandler: NextStateHandler = (state, app) => {
 	app.stage.addChild(trackSprite);
 
 	const heroSpriteLeft = heroState.spriteLeft,
-		heroSpriteRight = heroState.spriteRight;
+		heroSpriteRight = heroState.spriteRight,
+		heroSpriteLeftDig = heroState.spriteLeftDig
 
 	state.stepH = heroSpriteLeft.height / 2;
 	heroSpriteLeft.anchor.set(.5, 1);
@@ -33,7 +34,15 @@ const setupHandler: NextStateHandler = (state, app) => {
 		state.bottomY
 	);
 
+	heroSpriteLeftDig.anchor.set(.5, 1);
+	heroSpriteLeftDig.position.set(
+		state.leftCenterX,
+		state.bottomY
+	);
+	heroSpriteLeftDig.visible = false;
+
 	app.stage.addChild(heroSpriteLeft);
+	app.stage.addChild(heroSpriteLeftDig);
 
 	heroSpriteRight.anchor.set(.5, 1);
 	heroSpriteRight.position.set(
@@ -50,7 +59,9 @@ const setupHandler: NextStateHandler = (state, app) => {
 	healthSprite.width = 360;
 	(<any>healthSprite).zIndex = 100;
 	state.topY = healthSprite.height;
-
+	const overGroup = new PIXI.display.Group(2, false);
+	app.stage.addChild(new PIXI.display.Layer(overGroup));
+	healthSprite.parentGroup = overGroup;
 	app.stage.addChild(healthSprite);
 
 	state.viewTrackLevels.max = Math.ceil(state.bottomY / state.stepH) + 1;
@@ -87,6 +98,16 @@ const setupHandler: NextStateHandler = (state, app) => {
 		sprite.y = state.bottomY - level * state.stepH;
 		app.stage.addChild(sprite);
 	});
+
+	for (let l = state.viewTrackLevels.min; l <= state.viewTrackLevels.max; l++) {
+		var line = new PIXI.Graphics();
+		line.lineStyle(4, 0xffffff, 1);
+		line.moveTo(0, 0);
+		line.lineTo(app.renderer.width, 0);
+		//line.x = 32;
+		line.y = state.bottomY - l * state.stepH;
+		app.stage.addChild(line);
+	}
 
 	state.prevState = state.state;
 	state.state = States.start

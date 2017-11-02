@@ -16,6 +16,7 @@ export interface HeroState {
 	spriteRightFail: PIXI.Sprite;
 	isDigging: boolean;
 	startDigTime?: number;
+	endDigTime?: number;
 }
 
 export interface GameState {

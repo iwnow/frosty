@@ -34,7 +34,8 @@ export const getInitialState: () => GameState = () => ({
 		spriteRightFail: new PIXI.Sprite(textures.hero03),
 		onSide: HeroSide.leftSide,
 		isDigging: false,
-		startDigTime: -1
+		startDigTime: performance.now(),
+		endDigTime: performance.now()
 	},
 	trackSprite: new PIXI.extras.TilingSprite(textures.track),
 	packSprite: new PIXI.Sprite(textures.treasure),
