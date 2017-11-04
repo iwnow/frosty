@@ -11,6 +11,9 @@ const setupHandler: NextStateHandler = (state, app) => {
 
 	const { trackSprite, heroState, healthSprite } = state;
 
+	const overGroup = new PIXI.display.Group(2, false);
+	app.stage.addChild(new PIXI.display.Layer(overGroup));
+
 	trackSprite.anchor.x = .5;
 	trackSprite.x = app.renderer.width / 2;
 	trackSprite.height = app.renderer.height;
@@ -42,6 +45,8 @@ const setupHandler: NextStateHandler = (state, app) => {
 	);
 	heroSpriteLeftDig.visible = false;
 
+	heroSpriteLeft.parentGroup = overGroup;
+	heroSpriteLeftDig.parentGroup = overGroup;
 	app.stage.addChild(heroSpriteLeft);
 	app.stage.addChild(heroSpriteLeftDig);
 
@@ -61,6 +66,8 @@ const setupHandler: NextStateHandler = (state, app) => {
 	heroSpriteRightDig.scale.x = -1;
 	heroSpriteRightDig.visible = false;
 
+	heroSpriteRight.parentGroup = overGroup;
+	heroSpriteRightDig.parentGroup = overGroup;
 	app.stage.addChild(heroSpriteRight);
 	app.stage.addChild(heroSpriteRightDig);
 
@@ -69,8 +76,7 @@ const setupHandler: NextStateHandler = (state, app) => {
 	healthSprite.width = 360;
 	(<any>healthSprite).zIndex = 100;
 	state.topY = healthSprite.height;
-	const overGroup = new PIXI.display.Group(2, false);
-	app.stage.addChild(new PIXI.display.Layer(overGroup));
+
 	healthSprite.parentGroup = overGroup;
 	app.stage.addChild(healthSprite);
 
@@ -94,9 +100,10 @@ const setupHandler: NextStateHandler = (state, app) => {
 		state.obstacles.push({
 			level: l,
 			sprite: new PIXI.Sprite(obstacleTexture),
-			side: Random.getRandomBool() ? HeroSide.leftSide : HeroSide.rightSide
+			side: Random.getRandomBool() ? HeroSide.leftSide : HeroSide.rightSide,
+			removed: false
 		});
-		l += 2; //между препятствиями обязательно 1 пустой уровень + 2 уровня занимает препятствие
+		l += 3;
 	}
 
 	state.obstacles.forEach(o => {

@@ -42,12 +42,10 @@ export interface GameState {
 	};
 	//препятствия
 	obstacles: {
-		//текущий уровень
 		level: number;
-		//сторона
 		side: HeroSide;
-		//спрайт
 		sprite: PIXI.Sprite;
+		removed: boolean;
 	}[];
 	//текстуры препятствий
 	texturesObstacles: {
@@ -56,7 +54,7 @@ export interface GameState {
 	};
 
 	heroState: HeroState;
-	trackSprite: PIXI.Sprite;
+	trackSprite: PIXI.extras.TilingSprite;
 	packSprite: PIXI.Sprite;
 	healthSprite: PIXI.Sprite;
 }
