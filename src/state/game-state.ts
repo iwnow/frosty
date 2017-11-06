@@ -53,6 +53,12 @@ export interface GameState {
 		alternative: PIXI.Texture[]
 	};
 
+	textureHole: PIXI.Texture;
+	holes: {
+		level: number;
+		sprite: PIXI.Sprite;
+	}[];
+
 	heroState: HeroState;
 	trackSprite: PIXI.extras.TilingSprite;
 	packSprite: PIXI.Sprite;

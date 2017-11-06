@@ -25,6 +25,8 @@ export const getInitialState: () => GameState = () => ({
 		normal: [],
 		alternative: []
 	},
+	textureHole: textures.hole,
+	holes: [],
 	heroState: {
 		spriteLeft: new PIXI.Sprite(textures.hero01),
 		spriteRight: new PIXI.Sprite(textures.hero01),

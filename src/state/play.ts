@@ -20,6 +20,16 @@ const playHandler: NextStateHandler = (state, app) => {
 			});
 			state.trackSprite.tilePosition.y += state.stepH;
 			state.obstacles = state.obstacles.filter(o => !o.removed);
+
+			//holes
+			state.holes.forEach(hole => {
+				hole.level -= 1;
+				hole.sprite.y = state.bottomY - hole.level * state.stepH;
+				if (hole.level < state.viewTrackLevels.min) {
+					hole.sprite.parent.removeChild(hole.sprite);
+				}
+			})
+			state.holes = state.holes.filter(h => h.level >= state.viewTrackLevels.min)
 		},
 		addNextObstacle = () => {
 			if (!Random.getRandomBool()) return;
@@ -47,7 +57,23 @@ const playHandler: NextStateHandler = (state, app) => {
 				: state.rightCenterX;
 			newObstacle.sprite.y = state.bottomY - newObstacle.level * state.stepH;
 			app.stage.addChild(newObstacle.sprite);
+		},
+	makeHole = (side: HeroSide) => {
+		const hole = new PIXI.Sprite(state.textureHole);
+		hole.anchor.set(0, 1);
+		if (side === HeroSide.rightSide) {
+			hole.scale.x = -1;
+			hole.x = state.rightCenterX;
+		} else {
+			hole.x = state.leftCenterX;
 		}
+		hole.y = state.bottomY;
+		app.stage.addChild(hole);
+		state.holes.push({
+			level: 0,
+			sprite: hole
+		});
+	}
 
 	const hideHero = () => {
 		heroState.spriteRight.visible = false;
@@ -72,6 +98,7 @@ const playHandler: NextStateHandler = (state, app) => {
 		heroState.spriteLeftDig.visible = true;
 		heroState.startDigTime = performance.now();
 		heroState.onSide = HeroSide.leftSide;
+		makeHole(heroState.onSide);
 	}
 
 	if (keyArrowRight.key.isDown
@@ -83,6 +110,7 @@ const playHandler: NextStateHandler = (state, app) => {
 		heroState.spriteRightDig.visible = true;
 		heroState.startDigTime = performance.now();
 		heroState.onSide = HeroSide.rightSide;
+		makeHole(heroState.onSide);
 	}
 
 	if (heroState.isDigging
@@ -96,6 +124,7 @@ const playHandler: NextStateHandler = (state, app) => {
 		} else {
 			heroState.spriteRight.visible = true;
 		}
+		
 		makeStep();
 		addNextObstacle();
 	}
