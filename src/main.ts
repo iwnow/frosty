@@ -12,21 +12,8 @@ const gameDiv = document.getElementById('canvas_wrap') as HTMLDivElement,
 
 gameDiv.appendChild(app.view);
 
-//extends
-app.stage['updateLayersOrder'] = () => {
-	app.stage.children.sort((a: any, b: any) => {
-		a.zIndex = a.zIndex || 0;
-		b.zIndex = b.zIndex || 0;
-		return a.zIndex - b.zIndex
-	});
-};
-
-app.stage = new PIXI.display.Stage();
-app.stage['group'].enableSort = true;
-
 app.ticker.add(() => {
 	getState(app);
-	//app.stage['updateLayersOrder']();
 });
 
 

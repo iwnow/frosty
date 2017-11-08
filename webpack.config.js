@@ -6,8 +6,8 @@ const webpack = require('webpack'),
 
 module.exports = {
 	entry: {
-		'frosty': './src/main.ts',
-		'frosty.min': './src/main.ts'
+		'digger': './src/main.ts',
+		'digger.min': './src/main.ts'
 	},
 	output: {
 		filename: `[name].${packVersion}.js`,

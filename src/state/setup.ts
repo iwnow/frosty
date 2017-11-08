@@ -4,6 +4,28 @@ import { textures } from '../textures';
 import { keyArrowLeft, keyArrowRight } from '../keyboard';
 import * as Random from '../random';
 
+//game area left/right handlers
+const l = document.getElementById('left_side'),
+	r = document.getElementById('right_side');
+
+l.addEventListener('mousedown', (e) => {
+	e['keyCode'] = keyArrowLeft.key.code;
+	keyArrowLeft.key.downHandler(e);
+});
+l.addEventListener('mouseup', (e) => {
+	e['keyCode'] = keyArrowLeft.key.code;
+	keyArrowLeft.key.upHandler(e);
+});
+r.addEventListener('mousedown', (e) => {
+	e['keyCode'] = keyArrowRight.key.code;
+	keyArrowRight.key.downHandler(e);
+});
+r.addEventListener('mouseup', (e) => {
+	e['keyCode'] = keyArrowRight.key.code;
+	keyArrowRight.key.upHandler(e);
+});
+
+
 const setupHandler: NextStateHandler = (state, app) => {
 	app.stage.removeChildren();
 

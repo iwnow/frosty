@@ -47,3 +47,17 @@ body {
 	transition: opacity .2s ease-in;
 	z-index: 1;
 }
+
+
+.page_sides {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+}
+
+.left_side, .right_side {
+	flex: 1;
+}
