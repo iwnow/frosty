@@ -60,4 +60,5 @@ body {
 
 .left_side, .right_side {
 	flex: 1;
+	opacity: 0;
 }

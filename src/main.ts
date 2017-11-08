@@ -12,8 +12,12 @@ const gameDiv = document.getElementById('canvas_wrap') as HTMLDivElement,
 
 gameDiv.appendChild(app.view);
 
+app.stage = new PIXI.display.Stage();
+app.stage['group'].enableSort = true;
+
 app.ticker.add(() => {
 	getState(app);
+	//app.stage['updateLayersOrder']();
 });
 
 

@@ -8,22 +8,27 @@ import * as Random from '../random';
 const l = document.getElementById('left_side'),
 	r = document.getElementById('right_side');
 
-l.addEventListener('mousedown', (e) => {
-	e['keyCode'] = keyArrowLeft.key.code;
-	keyArrowLeft.key.downHandler(e);
-});
-l.addEventListener('mouseup', (e) => {
-	e['keyCode'] = keyArrowLeft.key.code;
-	keyArrowLeft.key.upHandler(e);
-});
-r.addEventListener('mousedown', (e) => {
-	e['keyCode'] = keyArrowRight.key.code;
-	keyArrowRight.key.downHandler(e);
-});
-r.addEventListener('mouseup', (e) => {
-	e['keyCode'] = keyArrowRight.key.code;
-	keyArrowRight.key.upHandler(e);
-});
+	['mousedown', 'touchstart'].forEach(ev => {
+		l.addEventListener(ev, (e) => {
+			e['keyCode'] = keyArrowLeft.key.code;
+			keyArrowLeft.key.downHandler(e);
+		});
+		r.addEventListener(ev, (e) => {
+			e['keyCode'] = keyArrowRight.key.code;
+			keyArrowRight.key.downHandler(e);
+		});
+	});
+
+	['mouseup', 'touchend'].forEach(ev => {
+		l.addEventListener(ev, (e) => {
+			e['keyCode'] = keyArrowLeft.key.code;
+			keyArrowLeft.key.upHandler(e);
+		});		
+		r.addEventListener(ev, (e) => {
+			e['keyCode'] = keyArrowRight.key.code;
+			keyArrowRight.key.upHandler(e);
+		});
+	});
 
 
 const setupHandler: NextStateHandler = (state, app) => {
@@ -33,7 +38,7 @@ const setupHandler: NextStateHandler = (state, app) => {
 
 	const { trackSprite, heroState, healthSprite } = state;
 
-	const overGroup = new PIXI.display.Group(2, false);
+	const overGroup = new PIXI.display.Group(99, true);
 	app.stage.addChild(new PIXI.display.Layer(overGroup));
 
 	trackSprite.anchor.x = .5;
@@ -145,7 +150,7 @@ const setupHandler: NextStateHandler = (state, app) => {
 		line.lineTo(app.renderer.width, 0);
 		//line.x = 32;
 		line.y = state.bottomY - l * state.stepH;
-		app.stage.addChild(line);
+		//app.stage.addChild(line);
 	}
 
 	state.prevState = state.state;
